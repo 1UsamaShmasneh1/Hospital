@@ -589,6 +589,10 @@ namespace Hospital.Ui
             oxginInBloodLabel.Text = string.Empty;
             heartbeatLabel.Text = string.Empty;
             heartbeatLabel.Text = string.Empty;
+            isSmokingLabel.Text = string.Empty;
+            sensitivesLabel.Text = string.Empty;
+            bloodTestLabel.Text = string.Empty;
+            urineTestLabel.Text= string.Empty;
         }
 
         private void NurseDetailsVisible()
