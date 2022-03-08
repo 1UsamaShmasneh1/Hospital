@@ -16,7 +16,7 @@ namespace Hospital.Logic
     every employee take his part of methods.
     4- Using Repository Patteren to open one connection to database.
      */
-    public class HospitalLogic: IDisposable, IPatientLogic, IAccountLogic, ISecretaryLogic, IGeneralLogic, INurseLogic, IDoctorLogic
+    public class HospitalLogic : IDisposable, IPatientLogic, IAccountLogic, ISecretaryLogic, IGeneralLogic, INurseLogic, IDoctorLogic
     {
         HospitalDBContext dBContext;
         private HospitalLogic()
@@ -292,15 +292,25 @@ namespace Hospital.Logic
                 .First(t => t.TreatmentInfoId == patient.Treatment.TreatmentInfoId);
             treatmentInfo.DiseaseDiagnosis = patient.Treatment.TreatmentInfo.DiseaseDiagnosis;
             treatmentInfo.MedicalAdvice = patient.Treatment.TreatmentInfo.MedicalAdvice;
-            foreach(var tm in patient.Treatment.TreatmentMedications)
+            for(int i = 0; i < patient.Treatment.TreatmentMedications.Count(); i++)
             {
-                treatmentMedication = tm;
+                treatmentMedication = patient.Treatment.TreatmentMedications.ToList()[i];
                 treatmentMedication.Treatment = null;
                 treatmentMedication.Medication = null;
-                treatmentMedication.MedicationId = tm.MedicationId;
+                treatmentMedication.MedicationId = patient.Treatment.TreatmentMedications.ToList()[i].MedicationId;
+                try
+                {
+                    treatmentMedication.TreatmentMedicationId = dBContext.TreatmentMedications
+                        .OrderByDescending(t => t.TreatmentMedicationId).ToList()[0].TreatmentMedicationId + 1 + i;
+                }
+                catch
+                {
+                    treatmentMedication.TreatmentMedicationId = 0;
+                }
                 dBContext.TreatmentMedications.Add(treatmentMedication);
-            }
-            (dBContext.Turns.Where(t => t.TurnId == patient.TurnId).First()).Status = 1;
+                
+            }            
+            dBContext.Turns.Find(patient.TurnId).Status = 1;
             Save();
         }
         #endregion

@@ -239,6 +239,13 @@ namespace Hospital.Ui
                     patientsDataGridView.Enabled = true; ;
                     searchTextBox.Enabled = true;
                     medicationPanel.saveButton.Enabled = true;
+                    medicationPanel.medicationDataGridView.DataSource = patient.Treatment.TreatmentMedications
+                        .Select(t => new {
+                            Medication = t.Medication.MedicationTitle,
+                            Ber_Day = t.BerBite,
+                            Ber_Bite = t.BerDay,
+                            Days = t.Days
+                        }).ToList();
                     break;
                 case "removeMedicationButton":
                     string medicationTitle = medicationPanel.medicationDataGridView.SelectedRows[0].Cells[0].Value.ToString();
@@ -447,14 +454,7 @@ namespace Hospital.Ui
             treatmentMedication.Days = Convert.ToInt32(medicationPanel.daysTextBox.Text);
             treatmentMedication.Medication = medication;
             treatmentMedication.Treatment = patient.Treatment;
-            patient.Treatment.TreatmentMedications.Add(treatmentMedication);
-            medicationPanel.medicationDataGridView.DataSource = patient.Treatment.TreatmentMedications
-                .Select(t => new {
-                    Medication = med, 
-                    Ber_Day = medicationPanel.berBiteTextBox.Text, 
-                    Ber_Bite = medicationPanel.berBiteTextBox.Text, 
-                    Days = medicationPanel.daysTextBox.Text
-                }).ToList();
+            patient.Treatment.TreatmentMedications.Add(treatmentMedication);            
         }
 
         //Clear all labels
