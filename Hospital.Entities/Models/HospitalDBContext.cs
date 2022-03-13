@@ -38,7 +38,7 @@ namespace Hospital.Entities.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=HospitalDB;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-UUKIMMC\\SQLEXPRESS;Initial Catalog=HospitalDB;Integrated Security=True");
             }
         }
 
@@ -225,9 +225,6 @@ namespace Hospital.Entities.Models
 
             modelBuilder.Entity<Patient>(entity =>
             {
-                entity.HasIndex(e => e.PersonId, "UK_Patients")
-                    .IsUnique();
-
                 entity.HasIndex(e => e.TurnId, "UK_Patients1")
                     .IsUnique();
 
@@ -251,8 +248,8 @@ namespace Hospital.Entities.Models
                     .HasConstraintName("FK_Patients_Departments");
 
                 entity.HasOne(d => d.Person)
-                    .WithOne(p => p.Patient)
-                    .HasForeignKey<Patient>(d => d.PersonId)
+                    .WithMany(p => p.Patients)
+                    .HasForeignKey(d => d.PersonId)
                     .HasConstraintName("FK_Patients_People");
 
                 entity.HasOne(d => d.SeverityOfDisease)
@@ -627,8 +624,8 @@ namespace Hospital.Entities.Models
                 );
 
             modelBuilder.Entity<MedicalFile>().HasData(
-                    new MedicalFile 
-                    { 
+                    new MedicalFile
+                    {
                         MedicalFileId = 1,
                         PersonId = 1
                     },
@@ -665,7 +662,8 @@ namespace Hospital.Entities.Models
                 );
 
             modelBuilder.Entity<Person>().HasData(
-                    new Person { 
+                    new Person
+                    {
                         Id = 1,
                         IdentityNumber = "308127125",
                         FirstName = "Usama",

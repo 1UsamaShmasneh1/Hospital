@@ -355,20 +355,14 @@ namespace Hospital.Logic
         }
 
         /*
-         * Fuction that check`s the status of the patient, if the 
-         * status is 5(in treatment) so change it to change the status
-         * to the last status by geting it from the patient property,
-         * if the status is not 5(not in treatment) so change it to 
+         * Fuction that change the status to 
          * status 5(to in treatment).
          */
         public void SetPatientInTreatment(Patient patient)
         {
             Patient relevantPatient = dBContext.Patients
                 .Where(t => t.PatientId == patient.PatientId).First();
-            if(relevantPatient.StatusId == 5)
-                relevantPatient.StatusId = patient.StatusId;
-            else
-                relevantPatient.StatusId = 5;
+            relevantPatient.StatusId = 5;
             Save();
         }
         #endregion

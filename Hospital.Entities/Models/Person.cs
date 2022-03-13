@@ -5,6 +5,11 @@ namespace Hospital.Entities.Models
 {
     public partial class Person
     {
+        public Person()
+        {
+            Patients = new HashSet<Patient>();
+        }
+
         public int Id { get; set; }
         public string IdentityNumber { get; set; } = null!;
         public string FirstName { get; set; } = null!;
@@ -20,6 +25,6 @@ namespace Hospital.Entities.Models
         public virtual Employee? Employee { get; set; }
         public virtual MedicalFile MedicalFileMedicalFileNavigation { get; set; } = null!;
         public virtual MedicalFile? MedicalFilePerson { get; set; }
-        public virtual Patient? Patient { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; }
     }
 }

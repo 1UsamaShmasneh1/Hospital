@@ -383,7 +383,7 @@ namespace Hospital.Ui
             {
                 patientsDataGridView.Enabled = false;
                 medicationPanel.backMedicationButton.Enabled = true;
-                medicationPanel.removeMedicationButton.Enabled = true;
+                medicationPanel.removeMedicationButton.Enabled = false;
                 medicationPanel.addMedicationButton.Enabled = true;
                 medicationPanel.berBiteTextBox.Enabled = true;
                 medicationPanel.berDayTextBox.Enabled = true;

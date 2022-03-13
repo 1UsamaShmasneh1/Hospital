@@ -157,7 +157,8 @@ namespace Hospital.Ui
                     sendToDoctorButton.Enabled = false;
                     patientsDataGridView.Enabled = true;
                     refreshButton.Enabled = true;
-                    nurseLogic.SetPatientInTreatment(patient);
+                    patient.StatusId = 2;
+                    nurseLogic.Save();
                     Clear();
                     break;
             }

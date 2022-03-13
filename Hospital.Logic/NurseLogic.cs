@@ -46,5 +46,10 @@ namespace Hospital.Logic
         {
             hospitalLogic.SetPatientInTreatment(patient);
         }
+
+        public void Save()
+        {
+            hospitalLogic.Save();
+        }
     }
 }

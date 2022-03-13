@@ -17,5 +17,7 @@ namespace Hospital.Logic
         Patient GetTreatment(Patient patient);
 
         void SetPatientInTreatment(Patient patient);
+
+        void Save();
     }
 }

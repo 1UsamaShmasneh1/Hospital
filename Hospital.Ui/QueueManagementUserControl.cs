@@ -20,6 +20,7 @@ namespace Hospital.Ui
         {
             InitializeComponent();
             patientLogic = new PatientLogic();
+            textBoxIdentityNumber.Enabled = false;
         }
 
         

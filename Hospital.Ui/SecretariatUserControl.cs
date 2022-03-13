@@ -127,6 +127,7 @@ namespace Hospital.Ui
             removeButton.Enabled = false;
             sendToNurseButton.Enabled = false;
             backButton.Enabled = false;
+            refreshButton.Enabled = true;
             secretaryLogic.RemovePatient(patient);
             patient = new Patient();
             Clear();
@@ -182,7 +183,7 @@ namespace Hospital.Ui
             backButton.Enabled = false;
             refreshButton.Enabled = true;
             patient.StatusId = 1;
-            secretaryLogic.SetPatientInTreatment(patient);
+            secretaryLogic.Save();
             Clear();
         }
 

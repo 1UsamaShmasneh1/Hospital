@@ -23,5 +23,17 @@ namespace Hospital.Ui
             if(Clicked != null)
                 Clicked(sender, e);
         }
+
+        private void ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Convert.ToInt32(((TextBox)sender).Text);
+            }
+            catch
+            {
+                ((TextBox)sender).Text = string.Empty;
+            }
+        }
     }
 }

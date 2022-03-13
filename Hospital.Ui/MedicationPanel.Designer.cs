@@ -61,6 +61,7 @@
             this.daysTextBox.Size = new System.Drawing.Size(50, 23);
             this.daysTextBox.TabIndex = 45;
             this.daysTextBox.Tag = "daysTextBox";
+            this.daysTextBox.TextChanged += new System.EventHandler(this.ValueChanged);
             // 
             // label18
             // 
@@ -79,6 +80,7 @@
             this.berBiteTextBox.Size = new System.Drawing.Size(50, 23);
             this.berBiteTextBox.TabIndex = 43;
             this.berBiteTextBox.Tag = "berBiteTextBox";
+            this.berBiteTextBox.TextChanged += new System.EventHandler(this.ValueChanged);
             // 
             // label17
             // 
@@ -132,6 +134,7 @@
             this.berDayTextBox.Size = new System.Drawing.Size(49, 23);
             this.berDayTextBox.TabIndex = 38;
             this.berDayTextBox.Tag = "berDayTextBox";
+            this.berDayTextBox.TextChanged += new System.EventHandler(this.ValueChanged);
             // 
             // label16
             // 
