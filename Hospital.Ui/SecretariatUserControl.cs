@@ -161,6 +161,9 @@ namespace Hospital.Ui
                 case "Hight":
                     patient.SeverityOfDiseaseId = 3;
                     break;
+                default:
+                    patient.SeverityOfDiseaseId = 1;
+                    break;
             }
             secretaryLogic.SendToNurse(patient);
             Clear();
