@@ -128,6 +128,7 @@ namespace Hospital.Ui
             sendToNurseButton.Enabled = false;
             backButton.Enabled = false;
             refreshButton.Enabled = true;
+            patientsDataGridView.Enabled = true;
             secretaryLogic.RemovePatient(patient);
             patient = new Patient();
             Clear();
