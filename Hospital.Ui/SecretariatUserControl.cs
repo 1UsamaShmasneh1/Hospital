@@ -144,6 +144,7 @@ namespace Hospital.Ui
             sendToNurseButton.Enabled = false;
             removeButton.Enabled = false;
             backButton.Enabled = false;
+            refreshButton.Enabled = true;
             treatment = new Treatment();
             treatment.TreatmentInfo = new TreatmentInfo();
             treatment.MedicalFileId = patient.Person.MedicalFileId;
