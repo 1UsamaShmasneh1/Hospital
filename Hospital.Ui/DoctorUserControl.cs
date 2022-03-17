@@ -140,6 +140,7 @@ namespace Hospital.Ui
                     nurseTapButton.Enabled = false;
                     refreshButton.Enabled = true;
                     doctorLogic.RemovePatient(patient);
+                    ShowPatientsWaitingToDoctor();
                     Clear();
                     break;
                 case "refresh":
