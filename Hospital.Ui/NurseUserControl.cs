@@ -99,6 +99,7 @@ namespace Hospital.Ui
                     patientsDataGridView.Enabled = true;
                     refreshButton.Enabled = true;
                     nurseLogic.RemovePatient(patient);
+                    ShowPatientsWaitingToNurse();
                     Clear();
                     break;
                 case "sendToDoctor":
