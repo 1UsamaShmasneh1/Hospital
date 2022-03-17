@@ -1,4 +1,5 @@
-﻿using Hospital.Entities.Models;
+﻿using Hospital.Entities;
+using Hospital.Entities.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,46 +11,57 @@ namespace Hospital.Logic
 {
     public class NurseLogic : IGeneralLogic, INurseLogic
     {
-        HospitalLogic hospitalLogic;
+        DBContextConnection dBContext;
 
         public NurseLogic()
         {
-            hospitalLogic = HospitalLogic.GetHospitalLogic();
-        }
-
-        public Patient GetPatient(string turnTitle)
-        {
-            return hospitalLogic.GetPatient(turnTitle);
-        }
-
-        public void RemovePatient(Patient patient)
-        {
-            hospitalLogic.RemovePatient(patient);
+            dBContext  = DBContextConnection.GetDBContextConnection();
         }
 
         public IEnumerable GetPatientsWaitingToNurse()
-        {
-            return hospitalLogic.GetPatientsWaitingToNurse();
+        {            
+            return dBContext.GetPatientsByStatusId(2);
         }
 
         public void SendToDoctor(Patient patient)
         {
-            hospitalLogic.SendToDoctor(patient);
+            //treatmentInfo.BloodPressure = patient.Treatment.TreatmentInfo.BloodPressure;
+            //treatmentInfo.Heat = patient.Treatment.TreatmentInfo.Heat;
+            //treatmentInfo.Heartbeat = patient.Treatment.TreatmentInfo.Heartbeat;
+            //treatmentInfo.OxginInBlood = patient.Treatment.TreatmentInfo.OxginInBlood;
+            //treatmentInfo.Sensitive = patient.Treatment.TreatmentInfo.Sensitive;
+            //treatmentInfo.BloodTest = patient.Treatment.TreatmentInfo.BloodTest;
+            //treatmentInfo.UrineTest = patient.Treatment.TreatmentInfo.UrineTest;
+            //treatmentInfo.IsSmoking = patient.Treatment.TreatmentInfo.IsSmoking;
+            //var relevantPatient = dBContext.Patients.Find(patient.PatientId);
+            patient.StatusId = 3;
+            dBContext.Save();
         }
 
-        public Patient GetTreatment(Patient patient)
+        public Patient GetPatient(string turnTitle)
         {
-            return hospitalLogic.GetTreatment(patient);
+            Patient patient = new Patient();
+            Turn turn = new Turn();
+            turn = dBContext.GetTurnByTurnTitle(turnTitle);
+            patient = dBContext.GetPatientByTurnId(turn.TurnId);
+            patient.Turn = turn;
+            patient.Person = dBContext.GetPersonByPersonId((int)patient.PersonId);
+            patient.Treatment = dBContext.GetTreatmentByTreatmentId((int)patient.TreatmentId);
+            patient.Treatment.TreatmentInfo = dBContext.GetTreatmentInfoByTreatmentInfoId((int)patient.Treatment.TreatmentInfoId);
+            patient.SeverityOfDisease = dBContext.GetSeverityOfDisease(patient);
+            return patient;
         }
 
-        public void SetPatientInTreatment(Patient patient)
+        public void RemovePatient(Patient patient)
         {
-            hospitalLogic.SetPatientInTreatment(patient);
+            patient.StatusId = 4;
+            dBContext.Save();
         }
-
-        public void Save()
+                
+        public void SetPatientInTreatment(Patient patient, int status)
         {
-            hospitalLogic.Save();
+            patient.StatusId = status;
+            dBContext.Save();
         }
     }
 }

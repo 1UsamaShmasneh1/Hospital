@@ -581,48 +581,7 @@ namespace Hospital.Entities.Models
                     }
                 );
 
-            modelBuilder.Entity<Employee>().HasData(
-                    new Employee
-                    {
-                        EmployeeId = 1,
-                        PersonId = 1,
-                        ManagerId = 4,
-                        JobId = 4,
-                        DepartmentId = 1,
-                        AccountId = 1
-                    },
-
-                    new Employee
-                    {
-                        EmployeeId = 2,
-                        PersonId = 2,
-                        ManagerId = 4,
-                        JobId = 2,
-                        DepartmentId = 1,
-                        AccountId = 2
-                    },
-
-                    new Employee
-                    {
-                        EmployeeId = 3,
-                        PersonId = 3,
-                        ManagerId = 4,
-                        JobId = 3,
-                        DepartmentId = 1,
-                        AccountId = 3
-                    },
-
-                    new Employee
-                    {
-                        EmployeeId = 4,
-                        PersonId = 4,
-                        ManagerId = null,
-                        JobId = 1,
-                        DepartmentId = 1,
-                        AccountId = 4
-                    }
-                );
-
+            
             modelBuilder.Entity<MedicalFile>().HasData(
                     new MedicalFile
                     {
@@ -739,11 +698,53 @@ namespace Hospital.Entities.Models
                         FirstName = "Rahil",
                         LastName = "Mezrahi",
                         AddressId = 6,
-                        PhoneNumber = "05296355862",
+                        PhoneNumber = "0529635586",
                         Email = "email@gmail.com",
                         MedicalFileId = 6,
                         DateOfBirth = new DateTime(1975, 10, 19),
                         Gender = "Female"
+                    }
+                );
+
+            modelBuilder.Entity<Employee>().HasData(
+                    new Employee
+                    {
+                        EmployeeId = 1,
+                        PersonId = 1,
+                        ManagerId = 4,
+                        JobId = 4,
+                        DepartmentId = 1,
+                        AccountId = 1
+                    },
+
+                    new Employee
+                    {
+                        EmployeeId = 2,
+                        PersonId = 2,
+                        ManagerId = 4,
+                        JobId = 2,
+                        DepartmentId = 1,
+                        AccountId = 2
+                    },
+
+                    new Employee
+                    {
+                        EmployeeId = 3,
+                        PersonId = 3,
+                        ManagerId = 4,
+                        JobId = 3,
+                        DepartmentId = 1,
+                        AccountId = 3
+                    },
+
+                    new Employee
+                    {
+                        EmployeeId = 4,
+                        PersonId = 4,
+                        ManagerId = null,
+                        JobId = 1,
+                        DepartmentId = 1,
+                        AccountId = 4
                     }
                 );
 

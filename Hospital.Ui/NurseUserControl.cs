@@ -157,8 +157,7 @@ namespace Hospital.Ui
                     sendToDoctorButton.Enabled = false;
                     patientsDataGridView.Enabled = true;
                     refreshButton.Enabled = true;
-                    patient.StatusId = 2;
-                    nurseLogic.Save();
+                    nurseLogic.SetPatientInTreatment(patient, 2);
                     Clear();
                     break;
             }
@@ -444,8 +443,7 @@ namespace Hospital.Ui
             patientsDataGridView.Enabled = false;
             refreshButton.Enabled = false;
             patient = nurseLogic.GetPatient(patientsDataGridView.CurrentCell.Value.ToString());
-            nurseLogic.SetPatientInTreatment(patient);
-            patient = nurseLogic.GetTreatment(patient);
+            nurseLogic.SetPatientInTreatment(patient, 2);
             firstnameLabel.Text = patient.Person.FirstName;
             lastnameLabel.Text = patient.Person.LastName;
             identityNumberLabel.Text = patient.Person.IdentityNumber;

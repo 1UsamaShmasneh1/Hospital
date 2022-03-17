@@ -14,10 +14,6 @@ namespace Hospital.Logic
 
         void RemovePatient(Patient patient);
 
-        Patient GetTreatment(Patient patient);
-
-        void SetPatientInTreatment(Patient patient);
-
-        void Save();
+        void SetPatientInTreatment(Patient patient, int status);
     }
 }

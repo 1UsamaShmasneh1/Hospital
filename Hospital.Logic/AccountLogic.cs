@@ -1,4 +1,5 @@
-﻿using Hospital.Entities.Models;
+﻿using Hospital.Entities;
+using Hospital.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,13 @@ namespace Hospital.Logic
     // Class that manage accounts in the hospital, get the methods by proxy interface
     public class AccountLogic : IAccountLogic
     {
-        private HospitalLogic hospitalLogic;
+        private DBContextConnection dBContext;
+        Employee employee;
         
         public AccountLogic()
         {
             // Reference to the main opject that have be made by singlton on the HospitalLogic.
-            this.hospitalLogic = HospitalLogic.GetHospitalLogic();
-
-            #region Event handlers
-            hospitalLogic.ErrorLogin += () => OnErrorLogin();
-            #endregion
+            dBContext = DBContextConnection.GetDBContextConnection();
         }
 
         #region Events
@@ -30,13 +28,32 @@ namespace Hospital.Logic
 
         public Employee Login(string username, string password)
         {
-            return hospitalLogic.Login(username, password);
+            bool isLoggedIn = false;
+            try
+            {
+                if (dBContext.IsUsernamePasswordMatch(username, password))
+                {
+                    employee = dBContext.GetEmployee(username, password);
+                    employee.Person = dBContext.GetPersonByEmplyee(employee);
+                    employee.Account = dBContext.GetAccountByEmployee(employee);
+                    employee.Account.Status = 1;
+                    isLoggedIn = true;
+                    dBContext.Save();
+                }
+            }
+            catch (InvalidOperationException)
+            {
+            }
+            if (!isLoggedIn)
+                OnErrorLogin();
+            return employee;
         }
 
         public void Logout(Employee employee)
         {
-            hospitalLogic.Logedout += () => OnLogedout();
-            hospitalLogic.Logout(employee);
+            employee.Account.Status = 0;
+            dBContext.Save();
+            OnLogedout();
         }
 
         #region On events

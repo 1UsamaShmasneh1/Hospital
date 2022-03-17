@@ -61,7 +61,7 @@ namespace Hospital.Ui
         private void patientsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             patient = secretaryLogic.GetPatient(patientsDataGridView.CurrentCell.Value.ToString());
-            secretaryLogic.SetPatientInTreatment(patient);
+            secretaryLogic.SetPatientInTreatment(patient, 5);
             firstnameLabel.Text = patient.Person.FirstName;
             lastnameLabel.Text = patient.Person.LastName;
             identityNumberLabel.Text = patient.Person.IdentityNumber;
@@ -182,8 +182,7 @@ namespace Hospital.Ui
             removeButton.Enabled = false;
             backButton.Enabled = false;
             refreshButton.Enabled = true;
-            patient.StatusId = 1;
-            secretaryLogic.Save();
+            secretaryLogic.SetPatientInTreatment(patient, 1);
             Clear();
         }
 

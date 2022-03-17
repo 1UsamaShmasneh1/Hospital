@@ -158,7 +158,7 @@ namespace Hospital.Ui
                     backButton.Enabled = false;
 
                     patient.StatusId = 3;
-                    doctorLogic.SetPatientInTreatment(patient);
+                    doctorLogic.SetPatientInTreatment(patient, 3);
                     Clear();
                     ShowPatientsWaitingToDoctor();
                     break;
@@ -352,8 +352,7 @@ namespace Hospital.Ui
                 refreshButton.Enabled = false;
 
                 patient = doctorLogic.GetPatient(patientsDataGridView.CurrentCell.Value.ToString());
-                doctorLogic.SetPatientInTreatment(patient);
-                patient = doctorLogic.GetTreatment(patient);
+                doctorLogic.SetPatientInTreatment(patient, 5);
                 firstnameLabel.Text = patient.Person.FirstName;
                 lastnameLabel.Text = patient.Person.LastName;
                 identityNumberLabel.Text = patient.Person.IdentityNumber;
