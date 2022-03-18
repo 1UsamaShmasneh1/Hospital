@@ -85,12 +85,12 @@ namespace Hospital.Entities
             {
                 patient.PatientId = dBContext
                     .Patients.OrderByDescending(p => p.PatientId).ToList()[0].PatientId + 1;
-                dBContext.Patients.Add(patient);
             }
             catch
             {
-                dBContext.Patients.Add(patient);
+                patient.PatientId = 0;
             }
+            dBContext.Patients.Add(patient);
         }
 
         public List<Patient> GetPatients()
