@@ -173,6 +173,7 @@ namespace Hospital.Ui
 
         private void refreshButton_Click(object sender, EventArgs e)
         {
+            patientsDataGridView.Enabled = true;
             ShowPatientsWaitingToSecretary();
         }
 
