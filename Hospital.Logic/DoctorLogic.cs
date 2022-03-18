@@ -68,7 +68,7 @@ namespace Hospital.Logic
 
         public void RemovePatient(Patient patient)
         {
-            dBContext.RemovePatient(patient);
+            patient.StatusId = 4;
             patient.Turn.Status = 1;
             dBContext.Save();
         }

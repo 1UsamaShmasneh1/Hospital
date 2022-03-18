@@ -35,15 +35,7 @@ namespace Hospital.Logic
 
         public void RemovePatient(Patient patient)
         {
-            var relevantPatient = dBContext.GetPatientByTurnId((int)patient.TurnId);
-            if (patient.Treatment == null)
-            {
-                dBContext.RemovePatient(relevantPatient);
-            }
-            else
-            {
-                patient.StatusId = 4;
-            }
+            patient.StatusId = 4;
             patient.Turn.Status = 1;
             dBContext.Save();
         }
